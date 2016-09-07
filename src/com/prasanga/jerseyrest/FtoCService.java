@@ -23,12 +23,8 @@ public class FtoCService {
 		JSONObject jsonObject2 = new JSONObject();
 
 		ResultSet result;
-		String ret;
+		//String ret;
 		
-		StringBuffer sBuffer = new StringBuffer();
-	       
-	       //System.out.println(sBuffer);
-
 		MysqlCon mc = new MysqlCon();
 		result = mc.selectAllData();
 		
@@ -48,15 +44,7 @@ public class FtoCService {
 			     
 			     jsonObject2.put(""+i, jsonObject1);
 			     i++;
-			     //jsonObject.put(key, value)
-			     //Display values
-			     //sBuffer.append("ID: " + id + ", Name: " + name + ", Address: " + address + ", Mobile: " + mobile);
-			     //ret = "ID: " + id + ", Name: " + name + ", Address: " + address + ", Mobile: " + mobile ;
-			     //System.out.print("ID: " + id);
-			     //System.out.print(", Name: " + name);
-			     //System.out.print(", Address: " + address);
-			     //System.out.println(", Mobile: " + mobile);
-
+			     
 			  }
 			
 		} catch (SQLException e) {
@@ -65,7 +53,7 @@ public class FtoCService {
 		}
 		
 		//System.out.println(sBuffer);
-		String res = "@Produces(\"application/json\") Output: \n\nF to C Converter Output: \n\n" + jsonObject2;
+		String res = "@Produces(\"application/json\") Output: \n\nOutput: \n\n" + jsonObject2;
 		return Response.status(200).entity(res).build();
 		
 	  }
@@ -73,16 +61,44 @@ public class FtoCService {
 	  @Path("{f}")
 	  @GET
 	  @Produces("application/json")
-	  public Response convertFtoCfromInput(@PathParam("f") float f) throws JSONException {
+	  public Response convertFtoCfromInput(@PathParam("f") String ret) throws JSONException {
 
-		JSONObject jsonObject = new JSONObject();
-		float celsius;
-		celsius =  (f - 32)*5/9; 
-		jsonObject.put("F Value", f); 
-		jsonObject.put("C Value", celsius);
+		  JSONObject jsonObject1 = new JSONObject();
+			//JSONObject jsonObject2 = new JSONObject();
 
-		String result = "@Produces(\"application/json\") Output: \n\nF to C Converter Output: \n\n" + jsonObject;
-		return Response.status(200).entity(result).build();
+			ResultSet result;
+			//String ret;
+			
+			MysqlCon mc = new MysqlCon();
+			result = mc.selectData(ret);
+			
+			try {
+				//int i = 1;
+				while(result.next()){
+				     //Retrieve by column name
+				     int id  = result.getInt("id");
+				     String name = result.getString("name");
+				     String address = result.getString("address");
+				     String mobile = result.getString("mobile");
+				     
+				     jsonObject1.put("ID", id); 
+				     jsonObject1.put("Name", name);
+				     jsonObject1.put("Address", address); 
+				     jsonObject1.put("Mobile", mobile);
+				     
+				     //jsonObject2.put(""+i, jsonObject1);
+				     //i++;
+				     
+				  }
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			//System.out.println(sBuffer);
+			String res = "@Produces(\"application/json\") Output: \n\nOutput: \n\n" + jsonObject1;
+			return Response.status(200).entity(res).build();
 	  }
 
 }

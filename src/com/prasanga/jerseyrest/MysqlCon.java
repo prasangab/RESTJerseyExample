@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.List;
 
 public class MysqlCon {
 	
@@ -38,41 +37,6 @@ public class MysqlCon {
 		      sql = "SELECT * FROM details";
 		      rs = stmt.executeQuery(sql);
 		      
-		      //Person p = new Person();
-		      //List<Person> data = null;
-		      //ArrayList al = new ArrayList();
-		    //STEP 5: Extract data from result set
-		      /*while(rs.next()){
-		         //Retrieve by column name
-		         int id  = rs.getInt("id");
-		         String name = rs.getString("name");
-		         String address = rs.getString("address");
-		         String mobile = rs.getString("mobile");
-
-		         p.setId(id);
-		         p.setName(name);
-		         p.setAddress(address);
-		         p.setMobile(mobile);
-		         
-		         
-		         //Display values
-		         System.out.print("ID: " + id);
-		         System.out.print(", Name: " + name);
-		         System.out.print(", Address: " + address);
-		         System.out.println(", Mobile: " + mobile);
-		         
-		         data.add(p);
-		      } */
-		      
-		      
-		      //System.out.println(data);
-		      //data.add(data);
-		      //STEP 6: Clean-up environment
-		      //rs.close();
-		      //stmt.close();
-		      //conn.close();
-		      
-		      //return rs;
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -101,46 +65,11 @@ public ResultSet selectData(String name){
 		      //STEP 4: Execute a query
 		      System.out.println("Creating statement...");
 		      stmt = conn.createStatement();
-		      //sql = "SELECT * FROM Users WHERE Name ='" + uName + "' AND Pass ='" + uPass + "'"
+
 		      String sql = "SELECT * FROM details WHERE name ='" + name + "'";
 		      rs = stmt.executeQuery(sql);
 		      
-		      //Person p = new Person();
-		      //List<Person> data = null;
-		      //ArrayList al = new ArrayList();
-		    //STEP 5: Extract data from result set
-		      /*while(rs.next()){
-		         //Retrieve by column name
-		         int id  = rs.getInt("id");
-		         String name = rs.getString("name");
-		         String address = rs.getString("address");
-		         String mobile = rs.getString("mobile");
-
-		         p.setId(id);
-		         p.setName(name);
-		         p.setAddress(address);
-		         p.setMobile(mobile);
-		         
-		         
-		         //Display values
-		         System.out.print("ID: " + id);
-		         System.out.print(", Name: " + name);
-		         System.out.print(", Address: " + address);
-		         System.out.println(", Mobile: " + mobile);
-		         
-		         data.add(p);
-		      } */
 		      
-		      
-		      //System.out.println(data);
-		      //data.add(data);
-		      //STEP 6: Clean-up environment
-		      //rs.close();
-		      //stmt.close();
-		      //conn.close();
-		      
-		      //return rs;
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
