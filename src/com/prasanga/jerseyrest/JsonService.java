@@ -12,12 +12,12 @@ import javax.ws.rs.core.Response;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-@Path("/ftocservice")
-public class FtoCService {
+@Path("/jsonservice")
+public class JsonService {
 	
 	@GET
 	  @Produces("application/json")
-	  public Response convertFtoC() throws JSONException {
+	  public Response getData() throws JSONException {
 
 		JSONObject jsonObject1 = new JSONObject();
 		JSONObject jsonObject2 = new JSONObject();
@@ -61,7 +61,7 @@ public class FtoCService {
 	  @Path("{f}")
 	  @GET
 	  @Produces("application/json")
-	  public Response convertFtoCfromInput(@PathParam("f") String ret) throws JSONException {
+	  public Response getDatafromInput(@PathParam("f") String ret) throws JSONException {
 
 		  JSONObject jsonObject1 = new JSONObject();
 			//JSONObject jsonObject2 = new JSONObject();

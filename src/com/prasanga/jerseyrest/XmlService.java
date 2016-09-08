@@ -2,14 +2,15 @@ package com.prasanga.jerseyrest;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
-@Path("/ctofservice")
-public class CtoFService {
-	
+@Path("/xmlservice")
+public class XmlService {
+
 	@GET
 	@Produces("application/xml")
 	
@@ -81,5 +82,4 @@ public class CtoFService {
 		String out = "@Produces(\"application/xml\") Output: \n\nOutput: \n\n" + sBuffer;
 		return "<ctofservice>"+"<ctofoutput>" + out + "</ctofoutput>" + "</ctofservice>";
 	}
-
 }
