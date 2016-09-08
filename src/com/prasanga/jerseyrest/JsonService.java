@@ -9,6 +9,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,17 +20,14 @@ public class JsonService {
 	  @Produces("application/json")
 	  public Response getData() throws JSONException {
 
-		JSONObject jsonObject1 = new JSONObject();
-		JSONObject jsonObject2 = new JSONObject();
+		JSONArray jArray = new JSONArray();
 
 		ResultSet result;
-		//String ret;
 		
 		MysqlCon mc = new MysqlCon();
 		result = mc.selectAllData();
 		
 		try {
-			int i = 1;
 			while(result.next()){
 			     //Retrieve by column name
 			     int id  = result.getInt("id");
@@ -37,13 +35,14 @@ public class JsonService {
 			     String address = result.getString("address");
 			     String mobile = result.getString("mobile");
 			     
+			     JSONObject jsonObject1 = new JSONObject();
+			     
 			     jsonObject1.put("ID", id); 
 			     jsonObject1.put("Name", name);
 			     jsonObject1.put("Address", address); 
 			     jsonObject1.put("Mobile", mobile);
 			     
-			     jsonObject2.put(""+i, jsonObject1);
-			     i++;
+			     jArray.put(jsonObject1);
 			     
 			  }
 			
@@ -52,8 +51,8 @@ public class JsonService {
 			e.printStackTrace();
 		}
 		
-		//System.out.println(sBuffer);
-		String res = "@Produces(\"application/json\") Output: \n\nOutput: \n\n" + jsonObject2;
+		//System.out.println(jArray);
+		String res = "" + jArray;
 		return Response.status(200).entity(res).build();
 		
 	  }
@@ -64,16 +63,13 @@ public class JsonService {
 	  public Response getDatafromInput(@PathParam("f") String ret) throws JSONException {
 
 		  JSONObject jsonObject1 = new JSONObject();
-			//JSONObject jsonObject2 = new JSONObject();
 
 			ResultSet result;
-			//String ret;
 			
 			MysqlCon mc = new MysqlCon();
 			result = mc.selectData(ret);
 			
 			try {
-				//int i = 1;
 				while(result.next()){
 				     //Retrieve by column name
 				     int id  = result.getInt("id");
@@ -85,9 +81,7 @@ public class JsonService {
 				     jsonObject1.put("Name", name);
 				     jsonObject1.put("Address", address); 
 				     jsonObject1.put("Mobile", mobile);
-				     
-				     //jsonObject2.put(""+i, jsonObject1);
-				     //i++;
+
 				     
 				  }
 				
@@ -96,8 +90,8 @@ public class JsonService {
 				e.printStackTrace();
 			}
 			
-			//System.out.println(sBuffer);
-			String res = "@Produces(\"application/json\") Output: \n\nOutput: \n\n" + jsonObject1;
+			//System.out.println(jsonObject1);
+			String res = ""+jsonObject1;
 			return Response.status(200).entity(res).build();
 	  }
 
